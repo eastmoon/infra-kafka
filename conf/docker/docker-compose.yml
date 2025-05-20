@@ -1,0 +1,19 @@
+# Docker-Compose document
+# Ref : https://docs.docker.com/compose/compose-file/
+
+services:
+  kafka:
+    build:
+      context: kafka
+    container_name: docker-kafka_${PROJECT_NAME}
+    restart: always
+    ports:
+      - 9092:9092
+      - 9094:9094
+    networks:
+      - kafka-net
+    working_dir: /opt/kafka/bin
+
+networks:
+  kafka-net:
+    driver: bridge
