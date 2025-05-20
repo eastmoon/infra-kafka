@@ -36,7 +36,7 @@ kafka into --tag=[service-name]
 
 對於 Kafka 軟體整體的簡介，詳細文獻整理參閱 [Kafka 介紹](./docs/introduction.md)。
 
-### 核心概念
+對於 Kafka 軟體核心概念與設計案例說明，詳細文獻整理參閱 [Kafka 設計概念](./docs/concept.md)。
 
 ### 事件訊息
 
