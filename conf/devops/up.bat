@@ -14,11 +14,6 @@ goto end
     echo Current Environment %PROJECT_ENV%
     echo PROJECT_NAME=%PROJECT_NAME% > %CONF_FILE_PATH%
 
-    @rem Setting cache directory
-    set TARGET_DIR=%CLI_DIRECTORY%cache\minio-data
-    IF NOT EXIST %TARGET_DIR% (mkdir %TARGET_DIR%)
-    echo MINIO_DATA_VOLUME=%TARGET_DIR% >> %CONF_FILE_PATH%
-
     goto end
 )
 

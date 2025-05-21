@@ -2,17 +2,38 @@
 # Ref : https://docs.docker.com/compose/compose-file/
 
 services:
-  kafka:
+  kafka-broker:
     build:
       context: kafka
-    container_name: docker-kafka_${PROJECT_NAME}
+    container_name: docker-kafka-broker_${PROJECT_NAME}
     restart: always
     ports:
+      - 9091:9091
       - 9092:9092
-      - 9094:9094
+    environment:
+      # Settings required for KRaft mode
+      KAFKA_NODE_ID: 1
+      KAFKA_PROCESS_ROLES: broker,controller
+      # Configure listeners for both docker and host communication
+      KAFKA_LISTENERS: CONTROLLER://:9091, HOST://:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT, HOST:PLAINTEXT
+      # Listener to use for broker-to-broker communication
+      KAFKA_INTER_BROKER_LISTENER_NAME: HOST
+      # Listener to use for controller-to-broker communication
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@localhost:9091
     networks:
       - kafka-net
     working_dir: /opt/kafka/bin
+
+  kafka-client:
+    build:
+      context: kafka
+    container_name: docker-kafka-client_${PROJECT_NAME}
+    networks:
+      - kafka-net
+    working_dir: /opt/kafka/bin
+    command: ["sleep", "infinity"]
 
 networks:
   kafka-net:

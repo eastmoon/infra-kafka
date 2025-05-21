@@ -38,7 +38,9 @@ kafka into --tag=[service-name]
 
 對於 Kafka 軟體核心概念與設計案例說明，詳細文獻整理參閱 [Kafka 設計概念](./docs/concept.md)。
 
-### 事件訊息
+### 事件與訊息
+
+本節基於 Kafka 基本使用方式，完成訊息傳遞與接收的範本，詳細文獻整理參閱 [事件與訊息](./docs/event-message.md)
 
 ### 用戶
 
