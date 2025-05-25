@@ -8,20 +8,22 @@ services:
     container_name: docker-kafka-broker_${PROJECT_NAME}
     restart: always
     ports:
-      - 9091:9091
       - 9092:9092
+      - 9093:9093
     environment:
       # Settings required for KRaft mode
       KAFKA_NODE_ID: 1
       KAFKA_PROCESS_ROLES: broker,controller
       # Configure listeners for both docker and host communication
-      KAFKA_LISTENERS: CONTROLLER://:9091, HOST://:9092
+      KAFKA_LISTENERS: HOST://:9092, CONTROLLER://:9093
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT, HOST:PLAINTEXT
       # Listener to use for broker-to-broker communication
       KAFKA_INTER_BROKER_LISTENER_NAME: HOST
       # Listener to use for controller-to-broker communication
       KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
-      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@localhost:9091
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka-broker:9093
+      # Setting replication factor, this number must same with node amount.
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
     networks:
       - kafka-net
     working_dir: /opt/kafka/bin
