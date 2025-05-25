@@ -84,8 +84,6 @@ bash kafka-topics.sh --create --topic quickstart-events --bootstrap-server local
 bash kafka-topics.sh --describe --topic quickstart-events --bootstrap-server localhost:9092
 ```
 
-bash kafka-topics.sh --describe --topic quickstart-events --bootstrap-server kafka-broker:9092
-
 ### Step 4: Write some events into the topic
 
 在 Kafka 中，客戶端可對以建立的主題來發送事件；因此，在進入服務，並達到工作目錄 ( ```/opt/kafka/bin``` ) 後，可以執行以下指令建立主題：
