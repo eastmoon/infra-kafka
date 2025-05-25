@@ -14,6 +14,9 @@ goto end
     echo Current Environment %PROJECT_ENV%
     echo PROJECT_NAME=%PROJECT_NAME% > %CONF_FILE_PATH%
 
+    @rem
+    echo APP_DIR=%CLI_DIRECTORY%app > %CONF_FILE_PATH%
+
     goto end
 )
 

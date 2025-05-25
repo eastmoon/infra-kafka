@@ -42,9 +42,9 @@ kafka into --tag=[service-name]
 
 本節基於 Kafka 基本使用方式，完成訊息傳遞與接收的範本，詳細文獻整理參閱 [事件與訊息](./docs/event-message.md)
 
-### 用戶
+### 客戶端
 
-### 用戶端
+本節基於 Kafka 在不同語言客戶端的環境建置與程式範本使用說明，詳細文獻整理參閱 [Kafka 客戶端](./docs/client.md)
 
 ### 連結器
 

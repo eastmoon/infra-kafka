@@ -37,6 +37,26 @@ services:
     working_dir: /opt/kafka/bin
     command: ["sleep", "infinity"]
 
+  kafka-client-sdk:
+    build:
+      context: sdk-c
+    container_name: docker-kafka-client-c_${PROJECT_NAME}
+    volumes:
+      - ${APP_DIR}/client-c:/app
+    networks:
+      - kafka-net
+    command: ["sleep", "infinity"]
+
+  kafka-client-python:
+    build:
+      context: sdk-python
+    container_name: docker-kafka-client-python_${PROJECT_NAME}
+    volumes:
+      - ${APP_DIR}/client-python:/app
+    networks:
+      - kafka-net
+    command: ["sleep", "infinity"]
+
 networks:
   kafka-net:
     driver: bridge
