@@ -48,6 +48,8 @@ kafka into --tag=[service-name]
 
 ### 連結器
 
+本節基於 Kafka 連結器的基礎設定與運用方式，詳細文獻整理參閱 [Kafka 連結器](./docs/connector.md)
+
 ### 安全性
 
 ## 文獻

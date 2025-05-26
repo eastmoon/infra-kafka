@@ -14,8 +14,13 @@ goto end
     echo Current Environment %PROJECT_ENV%
     echo PROJECT_NAME=%PROJECT_NAME% > %CONF_FILE_PATH%
 
-    @rem
+    @rem Application directory
     echo APP_DIR=%CLI_DIRECTORY%app > %CONF_FILE_PATH%
+
+    @rem Cache directory
+    set TARGET_DIR=%CLI_DIRECTORY%cache
+    IF NOT EXIST %TARGET_DIR% (mkdir %TARGET_DIR%)
+    echo CACHE_DIR=%TARGET_DIR% >> %CONF_FILE_PATH%
 
     goto end
 )

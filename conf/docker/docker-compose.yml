@@ -57,6 +57,20 @@ services:
       - kafka-net
     command: ["sleep", "infinity"]
 
+  kafka-connect-file:
+    build:
+      context: kafka
+    container_name: docker-kafka-connect-file_${PROJECT_NAME}
+    volumes:
+      - ${APP_DIR}/connect-file:/app
+      - ${CACHE_DIR}/connect-file:/data
+    ports:
+      - 8083:8083
+    networks:
+      - kafka-net
+    working_dir: /opt/kafka/bin
+    command: ["bash", "connect-standalone.sh", "/app/connect-standalone.properties", "/app/connect-source.properties", "/app/connect-sink.properties"]
+
 networks:
   kafka-net:
     driver: bridge
