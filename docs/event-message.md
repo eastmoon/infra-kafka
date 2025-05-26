@@ -1,4 +1,4 @@
-## 事件與訊息
+# 事件與訊息
 
 + [Use Cases](https://kafka.apache.org/uses)
 + [Apache Kafka Quickstart](https://kafka.apache.org/quickstart)
@@ -8,7 +8,7 @@
 
 本節主要說明並實踐操作 Kafka 的事件與訊息傳遞流程，主要流程參考文獻連結 [Apache Kafka Quickstart](https://kafka.apache.org/quickstart)，並從中增加專案所需的設計方案
 
-### Step 1: Get Kafka
+## Step 1: Get Kafka
 
 由於本專案採用 Docker 環境建立 Kafka 服務，因此採用執行 Docker 指令抓取必要的容器映像檔
 
@@ -18,7 +18,7 @@ docker pull apache/kafka:latest
 
 然而，考量最終採用 docker-compose 啟動服務，且有新增內容在映像檔的可能，建立 [kafka Dockerfile](../conf/docker/kafka/Dockerfile)，並由 [docker-compsoe](../conf/docker/docker-compose.yml) 使用該檔案並於相應 docker-compose 指令中建立新映像檔。
 
-### Step 2: Start the Kafka environment
+## Step 2: Start the Kafka environment
 
 由於本專案採用 Docker 環境建立 Kafka，因此遵循文獻的範本，可以下列指令建立環境，並參考 [apache/kafka](https://hub.docker.com/r/apache/kafka) 在 Docker hub 的說明文獻，最終服務啟動句如下：
 
@@ -42,11 +42,11 @@ kafka up
 kafak into --tag=kafka-broker
 ```
 
-#### [Kafka Docker Image Usage Guide](https://github.com/apache/kafka/blob/trunk/docker/examples/README.md)
+### [Kafka Docker Image Usage Guide](https://github.com/apache/kafka/blob/trunk/docker/examples/README.md)
 
 本文連結描述 Kafka 容器啟動如何設定配置資訊
 
-##### Use input file for providing configs
+#### Use input file for providing configs
 
 利用 Docker 掛載 [KRaft](https://kafka.apache.org/documentation/#kraft) 配置所需的檔案，其掛載位置的 Docker 指令如下：
 
@@ -54,7 +54,7 @@ kafak into --tag=kafka-broker
 docker run --volume /path/to/property/folder:/mnt/shared/config -p 9092:9092 apache/kafka:latest
 ```
 
-##### Using Environment Variables
+#### Using Environment Variables
 
 利用 Docker 環境變數對應到 [KRaft](https://kafka.apache.org/documentation/#kraft) 配置所需參數，其對應規則如下：
 
@@ -70,7 +70,7 @@ docker run --volume /path/to/property/folder:/mnt/shared/config -p 9092:9092 apa
 + KRaft 變數 ```abc_def``` 等於環境變數 ```KAFKA_ABC__DEF```
 + KRaft 變數 ```abc-def``` 等於環境變數 ```KAFKA_ABC___DEF```
 
-### Step 3: Create a topic to store your events
+## Step 3: Create a topic to store your events
 
 在 Kafka 中，事件的發佈與訂閱要透過主題 ( topic ) 運作；因此，在進入服務，並達到工作目錄 ( ```/opt/kafka/bin``` ) 後，可以執行以下指令建立主題：
 
@@ -84,7 +84,7 @@ bash kafka-topics.sh --create --topic quickstart-events --bootstrap-server local
 bash kafka-topics.sh --describe --topic quickstart-events --bootstrap-server localhost:9092
 ```
 
-### Step 4: Write some events into the topic
+## Step 4: Write some events into the topic
 
 在 Kafka 中，客戶端可對以建立的主題來發送事件；因此，在進入服務，並達到工作目錄 ( ```/opt/kafka/bin``` ) 後，可以執行以下指令建立主題：
 
@@ -103,7 +103,7 @@ This is my event 2
 EOF
 ```
 
-### Step 5: Read the events
+## Step 5: Read the events
 
 在 Kafka 中，客戶端可訂閱以建立的主題來讀取事件；因此，在進入服務，並達到工作目錄 ( ```/opt/kafka/bin``` ) 後，可以執行以下指令建立主題：
 
@@ -113,7 +113,7 @@ bash kafka-console-consumer.sh --topic quickstart-events --from-beginning --boot
 
 需要注意，此功能會啟動一個 Consumer 客戶端，若要離開請執行 ```Ctrl + C```。
 
-### Step 6: [Connecting to Kafka from both containers and native apps](https://docs.docker.com/guides/kafka/#connecting-to-kafka-from-both-containers-and-native-apps)
+## Step 6: [Connecting to Kafka from both containers and native apps](https://docs.docker.com/guides/kafka/#connecting-to-kafka-from-both-containers-and-native-apps)
 
 在 Kafka 服務啟動後，進行前述章節的操作，皆是運作在單一容器內；因此，本節將以 Kafka 容器為外部 Client 與當前的容器溝通並說明 Kafka 環境變數 listeners 與 advertised.listeners 的用途。
 
@@ -144,7 +144,7 @@ bash kafka-console-consumer.sh --topic quickstart-events --from-beginning --boot
 
 從運行結果來看，監聽器與通告監聽器會組成一個兌換表格，當來自 ```//0.0.0.0:9092``` 的訊問，因對應標籤 HOST 而回應 ```//localhost:9092```；而若其他容器訊問，則會因為得到 ```//localhost:9092``` 而無法執行，反之要詢問 ```//0.0.0.0:9093```，來得到 ```//kafka:9093``` 才可正常運行。
 
-#### 專案範例
+### 專案範例
 
 考量這兌換設計概念，本專案範例並無兌換必要，因此使用 ```HOST://:9092``` 設定且不額外設定 advertised.listeners，讓監聽與回應採用相同設定；但理解前述設定原則可以更好理解 Multiple nodes 或 Cluster 的設定規則。
 

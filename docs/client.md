@@ -11,15 +11,15 @@
     - [Confluent's Python Client for Apache KafkaTM](https://github.com/confluentinc/confluent-kafka-python)
         + [Getting Started with Apache Kafka and Python](https://developer.confluent.io/get-started/python/)
 
-當 Kafka 完成後，可以利用其 Kafka 安裝包內 ```bin``` 目錄的腳本進行基本的操作與演練，亦即在[事件與訊息](./docs/event-message.md)文件中的操作範本；倘若運用於系統維運，可以在訊息發送端啟用文件中的 kafka-client ( 不啟動 Kafka 的 Kafka 容器 ) 來接收與發送訊息，然而，若要提高處理效率或應用於不同的應用程式中，則需基於相應的程式語言導入函示庫，以便配合應用程式的業務邏輯來收發訊息。
+當 Kafka 完成後，可以利用其 Kafka 安裝包內 ```bin``` 目錄的腳本進行基本的操作與演練，亦即在[事件與訊息](./event-message.md)文件中的操作範本；倘若運用於系統維運，可以在訊息發送端啟用文件中的 kafka-client ( 不啟動 Kafka 的 Kafka 容器 ) 來接收與發送訊息，然而，若要提高處理效率或應用於不同的應用程式中，則需基於相應的程式語言導入函示庫，以便配合應用程式的業務邏輯來收發訊息。
 
 依據上述連結，[Kafka API](https://kafka.apache.org/documentation/#api) 提供了在 Java 的函示庫，[Apache Kafka Clients](https://cwiki.apache.org/confluence/display/KAFKA/Clients) 則提供了主流語言 C、Python、Go、Node.js 等的函示庫。
 
-本專案僅以 C、Python 進行範例實驗，詳細的函示庫操作與規劃細節不在此討論，請參閱上述連結的官方文獻；此外，以下範本僅設計 producer 與 consumer 的執行，請在執行前參考[事件與訊息 - 專案範例](./docs/event-message.md#專案範例)文件，建立必要的主題 ( Topic )。
+本專案僅以 C、Python 進行範例實驗，詳細的函示庫操作與規劃細節不在此討論，請參閱上述連結的官方文獻；此外，以下範本僅設計 producer 與 consumer 的執行，請在執行前參考[事件與訊息 - 專案範例](./event-message.md#專案範例)文件，建立必要的主題 ( Topic )。
 
 ## C
 
-Kafka 的 C 函示庫主要名為 librdkafka，本專案範本於 [sdk-c](./conf/docker/sdk-c) 中的 Dockerfile 建立 C 編譯工具與相依函示庫，進入開發環境請使用運維 CLI ：
+Kafka 的 C 函示庫主要名為 librdkafka，本專案範本於 [sdk-c](../conf/docker/sdk-c) 中的 Dockerfile 建立 C 編譯工具與相依函示庫，進入開發環境請使用運維 CLI ：
 
 ```
 ## 啟動服務
@@ -88,7 +88,7 @@ make consumer
 
 ## Python
 
-Kafka 的 Python 函示庫主要名為 confluent-kafka，本專案範本於 [sdk-python](./conf/docker/sdk-python) 中的 Dockerfile 建立 Python 開發環境，進入開發環境請使用運維 CLI ：
+Kafka 的 Python 函示庫主要名為 confluent-kafka，本專案範本於 [sdk-python](../conf/docker/sdk-python) 中的 Dockerfile 建立 Python 開發環境，進入開發環境請使用運維 CLI ：
 
 ```
 ## 啟動服務
