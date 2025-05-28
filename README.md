@@ -52,6 +52,8 @@ kafka into --tag=[service-name]
 
 ### 安全性
 
+本節基於 Kafka 安全配置與運用方式，詳細文獻整理參閱 [Kafka 安全性](./docs/security.md)
+
 ## 文獻
 
 + [Kafka](https://kafka.apache.org/documentation/)
